@@ -44,7 +44,7 @@ namespace AutoUpgrade.Net.Server
         {
             return Path.Combine(UpgradeRoot, fileName);
         }
-        public RespondResult CreateVersion(JsonReleaseVersion jsonReleaseVersion)
+        public JsonRespondResult CreateVersion(JsonReleaseVersion jsonReleaseVersion)
         {
             JsonReleaseVersion[] jsonReleaseVersions = this.GetVersionList();
             if (jsonReleaseVersions.Length > 0)
@@ -65,16 +65,16 @@ namespace AutoUpgrade.Net.Server
                 }
                 if (File.Exists(path) && Directory.Exists(dir))
                 {
-                    return new RespondResult() { Message = "新增版本" + jsonReleaseVersion.Version };
+                    return new JsonRespondResult() { Message = "新增版本" + jsonReleaseVersion.Version };
                 }
-                return new RespondResult() { Result = false, Message = "版本" + jsonReleaseVersion.Version + "新增失败" };
+                return new JsonRespondResult() { Result = false, Message = "版本" + jsonReleaseVersion.Version + "新增失败" };
             }
             catch (Exception ex)
             {
-                return new RespondResult() { Result = false, Message = ex.Message };
+                return new JsonRespondResult() { Result = false, Message = ex.Message };
             }
         }
-        public RespondResult DeleteVersion(string version)
+        public JsonRespondResult DeleteVersion(string version)
         {
             string dir = GetServerFilePath(version);
             string path = dir + ".json";
@@ -90,16 +90,16 @@ namespace AutoUpgrade.Net.Server
                 }
                 if (!File.Exists(path) && !Directory.Exists(dir))
                 {
-                    return new RespondResult() { Message = "已删除版本" + version };
+                    return new JsonRespondResult() { Message = "已删除版本" + version };
                 }
-                return new RespondResult() { Result = false, Message = "版本" + version + "删除失败" };
+                return new JsonRespondResult() { Result = false, Message = "版本" + version + "删除失败" };
             }
             catch (Exception ex)
             {
-                return new RespondResult() { Result = false, Message = ex.Message };
+                return new JsonRespondResult() { Result = false, Message = ex.Message };
             }
         }
-        public RespondResult DeleteFile(string fileName)
+        public JsonRespondResult DeleteFile(string fileName)
         {
             string filePath = GetServerFilePath(fileName);
             try
@@ -110,13 +110,13 @@ namespace AutoUpgrade.Net.Server
                 }
                 if (!File.Exists(filePath))
                 {
-                    return new RespondResult() { Message = "已删除文件" + fileName };
+                    return new JsonRespondResult() { Message = "已删除文件" + fileName };
                 }
-                return new RespondResult() { Result = false, Message = "文件" + fileName + "删除失败" };
+                return new JsonRespondResult() { Result = false, Message = "文件" + fileName + "删除失败" };
             }
             catch (Exception ex)
             {
-                return new RespondResult() { Result = false, Message = ex.Message };
+                return new JsonRespondResult() { Result = false, Message = ex.Message };
             }
         }
         public JsonReleaseVersion[] GetVersionList()
@@ -166,16 +166,16 @@ namespace AutoUpgrade.Net.Server
                 return false;
             }
         }
-        public RespondResult GetFileVersion(string fileName)
+        public JsonRespondResult GetFileVersion(string fileName)
         {
             string filePath = Path.Combine(this.UpgradeRoot, fileName);
             if (File.Exists(filePath))
             {
-                return new RespondResult() { Message = FileVersionInfo.GetVersionInfo(filePath).ProductVersion };
+                return new JsonRespondResult() { Message = FileVersionInfo.GetVersionInfo(filePath).ProductVersion };
             }
             else
             {
-                return new RespondResult() { Result = false, Message = "无法找到文件" };
+                return new JsonRespondResult() { Result = false, Message = "无法找到文件" };
             }
         }
     }

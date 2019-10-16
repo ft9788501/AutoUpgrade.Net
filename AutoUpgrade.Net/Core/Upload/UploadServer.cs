@@ -43,16 +43,16 @@ namespace AutoUpgrade.Net.Core
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public Task<RespondResult> Upload(HttpRequest httpRequest, string uploadDir = null)
+        public Task<JsonRespondResult> Upload(HttpRequest httpRequest, string uploadDir = null)
         {
-            return Task<RespondResult>.Run(() =>
+            return Task<JsonRespondResult>.Run(() =>
             {
                 try
                 {
-                    List<RespondResult> error = new List<RespondResult>();
+                    List<JsonRespondResult> error = new List<JsonRespondResult>();
                     foreach (var formFile in httpRequest.Form.Files)
                     {
-                        RespondResult respondResult = null;
+                        JsonRespondResult respondResult = null;
                         if (formFile.Name == "file")
                         {
                             respondResult = this.UploadOnce(formFile, uploadDir);
@@ -68,14 +68,14 @@ namespace AutoUpgrade.Net.Core
                     }
                     if (error.Count == 0)
                     {
-                        return new RespondResult()
+                        return new JsonRespondResult()
                         {
                             Message = "上传成功"
                         };
                     }
                     else
                     {
-                        return new RespondResult()
+                        return new JsonRespondResult()
                         {
                             Result = false,
                             Message = "上传失败",
@@ -85,7 +85,7 @@ namespace AutoUpgrade.Net.Core
                 }
                 catch (Exception ex)
                 {
-                    return new RespondResult()
+                    return new JsonRespondResult()
                     {
                         Result = false,
                         Message = "上传失败" + ex.Message
@@ -97,7 +97,7 @@ namespace AutoUpgrade.Net.Core
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        private RespondResult UploadOnce(IFormFile formFile, string uploadDir)
+        private JsonRespondResult UploadOnce(IFormFile formFile, string uploadDir)
         {
             try
             {
@@ -117,19 +117,19 @@ namespace AutoUpgrade.Net.Core
                     {
                         formFile.CopyTo(stream);
                     }
-                    return new RespondResult()
+                    return new JsonRespondResult()
                     {
                         Message = "上传成功"
                     };
                 }
-                return new RespondResult()
+                return new JsonRespondResult()
                 {
                     Message = "已经存在无需上传"
                 };
             }
             catch (Exception ex)
             {
-                return new RespondResult()
+                return new JsonRespondResult()
                 {
                     Result = false,
                     Message = formFile.FileName + ":上传失败" + ex.Message
@@ -140,7 +140,7 @@ namespace AutoUpgrade.Net.Core
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        private RespondResult UploadChunk(IFormFile formFile, string uploadDir)
+        private JsonRespondResult UploadChunk(IFormFile formFile, string uploadDir)
         {
             try
             {
@@ -160,19 +160,19 @@ namespace AutoUpgrade.Net.Core
                     {
                         formFile.CopyTo(stream);
                     }
-                    return new RespondResult()
+                    return new JsonRespondResult()
                     {
                         Message = "上传成功"
                     };
                 }
-                return new RespondResult()
+                return new JsonRespondResult()
                 {
                     Message = "已经存在无需上传"
                 };
             }
             catch (Exception ex)
             {
-                return new RespondResult()
+                return new JsonRespondResult()
                 {
                     Result = false,
                     Message = formFile.FileName + ":的分块" + formFile.Name + " 上传失败" + ex.Message
@@ -184,14 +184,14 @@ namespace AutoUpgrade.Net.Core
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public Task<RespondResult> Merge(string fileName)
+        public Task<JsonRespondResult> Merge(string fileName)
         {
-            return Task<RespondResult>.Run(() =>
+            return Task<JsonRespondResult>.Run(() =>
             {
                 string dir = Path.Combine(this.UploadRoot, fileName + "_Merge");
                 if (!Directory.Exists(dir))
                 {
-                    return new RespondResult()
+                    return new JsonRespondResult()
                     {
                         Result = false,
                         Message = "不存在合并的文件" + fileName
@@ -217,14 +217,14 @@ namespace AutoUpgrade.Net.Core
                             }
                         }
                     }
-                    return new RespondResult()
+                    return new JsonRespondResult()
                     {
                         Message = "合并成功"
                     };
                 }
                 catch (Exception ex)
                 {
-                    return new RespondResult()
+                    return new JsonRespondResult()
                     {
                         Result = false,
                         Message = "文件合并出错！请重新上传！"

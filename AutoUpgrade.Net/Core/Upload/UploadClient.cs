@@ -135,7 +135,7 @@ namespace AutoUpgrade.Net.Core
                     var result = await client.PostAsync(new Uri(this.uploadUrl + "?uploadDir=" + dir), multipartFormDataContent);
                     if (result.IsSuccessStatusCode)
                     {
-                        RespondResult respondResult = JsonConvert.DeserializeObject<RespondResult>(await result.Content.ReadAsStringAsync());
+                        JsonRespondResult respondResult = JsonConvert.DeserializeObject<JsonRespondResult>(await result.Content.ReadAsStringAsync());
                         if (!respondResult.Result)
                         {
                             this.OnUploadError(new ErrorArgs(respondResult.Message));
@@ -245,7 +245,7 @@ namespace AutoUpgrade.Net.Core
                     var result = await client.PostAsync(new Uri(this.uploadUrl + "?uploadDir=" + dir), multipartFormDataContent);
                     if (result.IsSuccessStatusCode)
                     {
-                        RespondResult respondResult = JsonConvert.DeserializeObject<RespondResult>(await result.Content.ReadAsStringAsync());
+                        JsonRespondResult respondResult = JsonConvert.DeserializeObject<JsonRespondResult>(await result.Content.ReadAsStringAsync());
                         success = respondResult.Result;
                         if (!respondResult.Result)
                         {
@@ -285,7 +285,7 @@ namespace AutoUpgrade.Net.Core
                     var result = await httpClient.GetAsync(this.mergeURL + "?fileName=" + fileName);
                     if (result.IsSuccessStatusCode)
                     {
-                        RespondResult respondResult = JsonConvert.DeserializeObject<RespondResult>(await result.Content.ReadAsStringAsync());
+                        JsonRespondResult respondResult = JsonConvert.DeserializeObject<JsonRespondResult>(await result.Content.ReadAsStringAsync());
                         if (!respondResult.Result)
                         {
                             this.OnUploadError(new ErrorArgs(respondResult.Message));

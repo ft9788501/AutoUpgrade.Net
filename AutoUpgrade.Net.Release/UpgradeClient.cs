@@ -78,7 +78,7 @@ namespace AutoUpgrade.Net.Release
                     HttpResponseMessage httpResponseMessage = await httpClient.DeleteAsync(this.url + "/deleteVersion?version=" + version);
                     if (httpResponseMessage.IsSuccessStatusCode)
                     {
-                        RespondResult respondResult = JsonConvert.DeserializeObject<RespondResult>(await httpResponseMessage.Content.ReadAsStringAsync());
+                        JsonRespondResult respondResult = JsonConvert.DeserializeObject<JsonRespondResult>(await httpResponseMessage.Content.ReadAsStringAsync());
                         if (!respondResult.Result)
                         {
                             this.OnUpgradeError(new ErrorArgs(respondResult.Message));
@@ -108,7 +108,7 @@ namespace AutoUpgrade.Net.Release
                     var result = await client.PostAsync(new Uri(this.url + "/createVersion"), stringContent);
                     if (result.IsSuccessStatusCode)
                     {
-                        RespondResult respondResult = JsonConvert.DeserializeObject<RespondResult>(await result.Content.ReadAsStringAsync());
+                        JsonRespondResult respondResult = JsonConvert.DeserializeObject<JsonRespondResult>(await result.Content.ReadAsStringAsync());
                         if (!respondResult.Result)
                         {
                             this.OnUpgradeError(new ErrorArgs(respondResult.Message));
@@ -193,7 +193,7 @@ namespace AutoUpgrade.Net.Release
                     HttpResponseMessage httpResponseMessage = await httpClient.GetAsync(this.url + "/getFileVersion?fileName=" + fileName);
                     if (httpResponseMessage.IsSuccessStatusCode)
                     {
-                        RespondResult respondResult = JsonConvert.DeserializeObject<RespondResult>(await httpResponseMessage.Content.ReadAsStringAsync());
+                        JsonRespondResult respondResult = JsonConvert.DeserializeObject<JsonRespondResult>(await httpResponseMessage.Content.ReadAsStringAsync());
                         if (respondResult.Result)
                         {
                             return respondResult.Message;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AutoUpgrade.Net.Json
 {
-    public class RespondResult
+    public class JsonRespondResult
     {
         public bool Result { get; set; } = true;
         public string Message { get; set; }

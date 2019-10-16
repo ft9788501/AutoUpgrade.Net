@@ -12,13 +12,18 @@ namespace AutoUpgrade.Net.Server
 {
     public class Program
     {
+        private static IConfigurationRoot Host { get; set; }
         public static void Main(string[] args)
         {
+            Host = new ConfigurationBuilder().SetBasePath(AppContext.BaseDirectory)
+                                       .AddJsonFile("host.json")
+                                       .Build();
             CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            .UseUrls(Host["url"])
+            .UseStartup<Startup>();
     }
 }

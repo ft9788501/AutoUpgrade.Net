@@ -61,7 +61,7 @@ namespace AutoUpgrade.Net.Server.Controllers
         [HttpDelete("deleteVersion")]
         public async Task<IActionResult> DeleteVersion(string version)
         {
-            return await Task<IActionResult>.Run(() =>
+            return await Task.Run(() =>
             {
                 return Json(upgradeServer.DeleteVersion(version));
             });
@@ -69,7 +69,7 @@ namespace AutoUpgrade.Net.Server.Controllers
         [HttpDelete("deleteFile")]
         public async Task<IActionResult> DeleteFile(string fileName)
         {
-            return await Task<IActionResult>.Run(() =>
+            return await Task.Run(() =>
             {
                 return Json(upgradeServer.DeleteFile(fileName));
             });
@@ -77,7 +77,7 @@ namespace AutoUpgrade.Net.Server.Controllers
         [HttpPost("createVersion")]
         public async Task<IActionResult> CreateVersion(JsonReleaseVersion jsonReleaseVersion)
         {
-            return await Task<IActionResult>.Run(() =>
+            return await Task.Run(() =>
             {
                 return Json(upgradeServer.CreateVersion(jsonReleaseVersion));
             });
@@ -85,7 +85,7 @@ namespace AutoUpgrade.Net.Server.Controllers
         [HttpGet("getVersionList")]
         public async Task<IActionResult> GetVersionList()
         {
-            return await Task<IActionResult>.Run(() =>
+            return await Task.Run(() =>
             {
                 return Json(upgradeServer.GetVersionList());
             });
@@ -93,7 +93,7 @@ namespace AutoUpgrade.Net.Server.Controllers
         [HttpGet("checkVersion")]
         public async Task<IActionResult> CheckVersion(string version)
         {
-            return await Task<IActionResult>.Run(() =>
+            return await Task.Run(() =>
             {
                 return Json(upgradeServer.CheckVersion(version));
             });
@@ -101,7 +101,7 @@ namespace AutoUpgrade.Net.Server.Controllers
         [HttpGet("upgradeable")]
         public async Task<IActionResult> Upgradeable(string version)
         {
-            return await Task<IActionResult>.Run(() =>
+            return await Task.Run(() =>
             {
                 return Json(upgradeServer.Upgradeable(version));
             });
@@ -114,7 +114,7 @@ namespace AutoUpgrade.Net.Server.Controllers
         [HttpGet("getFileVersion")]
         public async Task<IActionResult> GetFileVersion(string fileName)
         {
-            return await Task<IActionResult>.Run(() =>
+            return await Task.Run(() =>
             {
                 return Json(upgradeServer.GetFileVersion(fileName));
             });

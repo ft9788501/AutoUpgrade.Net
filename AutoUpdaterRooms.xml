@@ -1,9 +1,6 @@
 <item>
 <version>2.0.0.0</version>
-<checksum>
-<algorithm>MD5</algorithm>
-qweqwsfdetw4tredgsfdgew4564wtsfg
-</checksum>
+<checksum algorithm="MD5">qweqwsfdetw4tredgsfdgew4564wtsfg</checksum>
 <url>https://rbsoft.org/downloads/AutoUpdaterTest.zip</url>
 <changelog>
 https://github.com/ravibpatel/AutoUpdater.NET/releases

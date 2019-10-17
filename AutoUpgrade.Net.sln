@@ -11,11 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{9948BF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoUpgrade.Net.Server", "AutoUpgrade.Net.Server\AutoUpgrade.Net.Server.csproj", "{00D46BDE-E12E-41E4-B08F-B502473B96FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpgrade.Net", "AutoUpgrade.Net\AutoUpgrade.Net.csproj", "{8E1B648A-FE0A-4062-ACA4-AAAEBB9583B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoUpgrade.Net", "AutoUpgrade.Net\AutoUpgrade.Net.csproj", "{8E1B648A-FE0A-4062-ACA4-AAAEBB9583B1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Release", "Release", "{AF3C2034-BB4B-4CE8-8602-769A388E5A6F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpgrade.Net.Release", "AutoUpgrade.Net.Release\AutoUpgrade.Net.Release.csproj", "{57F328B8-2C2B-4F59-ACD9-8D79A771FD48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{F14AF4D9-E3CD-447C-85E9-FED4D223F083}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{57F328B8-2C2B-4F59-ACD9-8D79A771FD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57F328B8-2C2B-4F59-ACD9-8D79A771FD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57F328B8-2C2B-4F59-ACD9-8D79A771FD48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F14AF4D9-E3CD-447C-85E9-FED4D223F083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F14AF4D9-E3CD-447C-85E9-FED4D223F083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F14AF4D9-E3CD-447C-85E9-FED4D223F083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F14AF4D9-E3CD-447C-85E9-FED4D223F083}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

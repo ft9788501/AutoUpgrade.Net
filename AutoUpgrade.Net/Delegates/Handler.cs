@@ -26,4 +26,9 @@ namespace AutoUpgrade.Net.Delegates
     /// <param name="sender"></param>
     /// <param name="errorArgs"></param>
     public delegate void ErrorHandler(object sender, ErrorArgs errorArgs);
+    /// <summary>
+    /// pipe消息事件委托
+    /// </summary>
+    /// <param name="msg"></param>
+    public delegate void PipeMessageHandler(byte[] data);
 }

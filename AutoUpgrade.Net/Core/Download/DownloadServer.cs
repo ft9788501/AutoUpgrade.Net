@@ -44,6 +44,7 @@ namespace AutoUpgrade.Net.Core
         /// <returns></returns>
         private string GetServerFilePath(string fileName)
         {
+            if (string.IsNullOrEmpty(fileName)) { return null; }
             return Path.Combine(DownloadRoot, fileName);
         }
         /// <summary> 获取文件分块信息
@@ -93,7 +94,7 @@ namespace AutoUpgrade.Net.Core
         /// </summary>
         /// <param name="partialFileInfo"></param>
         /// <returns></returns>
-        private Stream GetPartialFileStream( PartialFileInfo partialFileInfo)
+        private Stream GetPartialFileStream(PartialFileInfo partialFileInfo)
         {
             return new PartialFileStream(partialFileInfo.FilePath, partialFileInfo.From, partialFileInfo.To);
         }
@@ -129,6 +130,7 @@ namespace AutoUpgrade.Net.Core
             return Task.Run<Stream>(() =>
             {
                 string filePath = this.GetServerFilePath(fileName);
+                if (!File.Exists(filePath)) { return null; }
                 PartialFileInfo partialFileInfo = this.GetPartialFileInfo(httpContext.Request, filePath);
                 this.SetResponseHeaders(httpContext.Response, partialFileInfo);
                 return this.GetPartialFileStream(partialFileInfo);
@@ -141,6 +143,7 @@ namespace AutoUpgrade.Net.Core
         public Stream GetDownloadStream(HttpContext httpContext, string fileName)
         {
             string filePath = this.GetServerFilePath(fileName);
+            if (!File.Exists(filePath)) { return null; }
             PartialFileInfo partialFileInfo = this.GetPartialFileInfo(httpContext.Request, filePath);
             this.SetResponseHeaders(httpContext.Response, partialFileInfo);
             return this.GetPartialFileStream(partialFileInfo);

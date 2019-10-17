@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using AutoUpgrade.Net.Core;
 using AutoUpgrade.Net.Json;
+using IdentityModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 
 namespace AutoUpgrade.Net.Server.Controllers
@@ -17,6 +23,38 @@ namespace AutoUpgrade.Net.Server.Controllers
         private DownloadServer serverDownload = new DownloadServer("Upgrade");
         private UploadServer serverUpload = new UploadServer("Upgrade");
         private UpgradeServer upgradeServer = new UpgradeServer("Upgrade");
+
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate()
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var authTime = DateTime.UtcNow;
+            var expiresAt = authTime.AddDays(7);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+            new Claim(JwtClaimTypes.Audience,"api"),
+            new Claim(JwtClaimTypes.Issuer,"YFAPICommomCore2"),
+                }),
+                Expires = expiresAt,
+                SigningCredentials = new SigningCredentials(Startup.symmetricKey, SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+            return Ok(new
+            {
+                access_token = tokenString,
+                token_type = "Bearer",
+                profile = new
+                {
+                    sid = "1",
+                    name = "xxxx",
+                    auth_time = new DateTimeOffset(authTime).ToUnixTimeSeconds(),
+                    expires_at = new DateTimeOffset(expiresAt).ToUnixTimeSeconds()
+                }
+            });
+        }
         /// <summary>
         /// 用文件名获取下载链接
         /// </summary>
@@ -26,11 +64,27 @@ namespace AutoUpgrade.Net.Server.Controllers
         /// </remarks>
         /// <param name="fileName">文件名</param>
         /// <returns>文件下载请求结果</returns> 
+        [Authorize]
         [HttpGet("download")]
         public async Task<IActionResult> Download(string fileName)
         {
             Stream stream = await serverDownload.GetDownloadStreamAsync(this.HttpContext, fileName);
+            if (stream == null)
+            {
+                return NotFound();
+            }
             return File(stream, this.HttpContext.Response.Headers[HeaderNames.ContentType].ToString(), true);
+        }
+        [Authorize]
+        [HttpGet("download1")]
+        public async Task<IActionResult> Download1()
+        {
+            return Content("aaaaaaaaaaaaaaa");
+        }
+        [HttpGet("download2")]
+        public async Task<IActionResult> Download2()
+        {
+            return Content("aaaaaaaaaaaaaaa");
         }
         /// <summary>
         /// 上传文件

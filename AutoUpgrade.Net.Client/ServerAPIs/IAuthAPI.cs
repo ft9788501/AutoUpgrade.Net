@@ -8,6 +8,6 @@ namespace AutoUpgrade.Net.Client.ServerAPIs
 {
     public interface IAuthAPI
     {
-        string GetToken(string userName, string password);
+        Task<string> GetToken(string userName, string password);
     }
 }

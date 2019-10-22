@@ -8,26 +8,22 @@ using IdentityModel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace AutoUpgrade.Net.Server
 {
     public class Startup
     {
-        //4MfCH65CufRztreOkao2kgCWH1cEe59z
-        //OZUegy8FE6vwT4EpeZxxOcp1RHswF2CB
-        //hGt8hFz93acU7ph2WJorqWbz0NMYhWGk
-        //hfg4JjW8Z9WjUFTJeYPBgZ0BX9MuSHaS
-        //FuPE3hkms16zBoCBH8UnW722ozJnUefA
-        //EgQX7KdRzzaNe3XipvcfHsH4tl1tBUiH
-        //8mCICZFTvN4o3d3geF6xo3kBW1iws6kI
         //Auth秘钥
         public static readonly SymmetricSecurityKey symmetricKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("hfg4JjW8Z9WjUFTJeYPBgZ0BX9MuSHaS"));
         public Startup(IConfiguration configuration)
@@ -40,6 +36,19 @@ namespace AutoUpgrade.Net.Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss.fff";
+            });
+            var tokenProviderOptions = new TokenProviderOptions(Configuration);
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(tokenProviderOptions.SetJwtBearerOptions);
+            services.AddSingleton(tokenProviderOptions);
             //注册Swagger生成器，定义一个和多个Swagger 文档
             services.AddSwaggerGen(options =>
             {
@@ -52,43 +61,19 @@ namespace AutoUpgrade.Net.Server
                     In = "header",//jwt默认存放Authorization信息的位置(请求头中)
                     Type = "apiKey"
                 });
-
-                options.OperationFilter<IdentityServer4OAuth2OperationFilter>();
                 // 为 Swagger JSON and UI设置xml文档注释路径
                 var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);//获取应用程序所在目录（绝对，不受工作目录影响，建议采用此方法获取路径）
                 var xmlPath = Path.Combine(basePath, "UpgradeServer.xml");
                 options.IncludeXmlComments(xmlPath);
+                options.OperationFilter<HttpHeaderOperation>();
+                options.DocumentFilter<ControllerDescFilter>(xmlPath);
+                options.OrderActionsBy(a => a.HttpMethod);
             });
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(o =>
-                {
-                    o.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        NameClaimType = JwtClaimTypes.Name,
-                        RoleClaimType = JwtClaimTypes.Role,
 
-                        ValidIssuer = "YFAPICommomCore2",
-                        ValidAudience = "api",
-                        IssuerSigningKey = symmetricKey
-
-
-                        /***********************************TokenValidationParameters的参数默认值***********************************/
-                        // RequireSignedTokens = true,
-                        // SaveSigninToken = false,
-                        // ValidateActor = false,
-                        // 将下面两个参数设置为false，可以不验证Issuer和Audience，但是不建议这样做。
-                        // ValidateAudience = true,
-                        // ValidateIssuer = true, 
-                        // ValidateIssuerSigningKey = false,
-                        // 是否要求Token的Claims中必须包含Expires
-                        // RequireExpirationTime = true,
-                        // 允许的服务器时间偏移量
-                        // ClockSkew = TimeSpan.FromSeconds(300),
-                        // 是否验证Token有效期，使用当前时间与Token的Claims中的NotBefore和Expires对比
-                        // ValidateLifetime = true
-                    };
-                });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.Configure<IISOptions>(options => { });
+            //依赖注入获取HttpContext
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

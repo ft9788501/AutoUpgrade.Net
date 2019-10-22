@@ -17,38 +17,21 @@ namespace AutoUpgrade.Net.Client.Winform
         [STAThread]
         static void Main(string[] args)
         {
-            //args = "-v aaa -pid aaaa".Split(' ');
-            if (args.Length == 0 || args.Contains("/?") || args.Contains("?"))
-            {
-                Console.WriteLine("upgrader started with no args");
-                MessageBox.Show(CommandProvider.GetInfo());
-            }
-            else
-            {
-                Console.WriteLine($"upgrader started with args");
-                CommandProvider.Init(args);
-                Console.WriteLine($"args count : {CommandProvider.CommandCount}");
-                if (!CommandProvider.NullableCheck(out string msg))
-                {
-                    Console.Error.WriteLine("-error -- " + msg);
-                    return;
-                }
-                if (APIProvider.UpgradeAPI.IsNeedUpgrade(CommandProvider.Version.Value))
-                {
-                    Console.WriteLine("-upgradable");
-                    Process.GetProcessById(CommandProvider.ProcessID);
-                    string token = APIProvider.AuthAPI.GetToken("account", "password");
-                    var upgradeInfo = APIProvider.UpgradeAPI.GetUpgradeInfo("vvvvv", token);
-                    Console.WriteLine($"upgradable version:{upgradeInfo.Version}");
-                    Application.EnableVisualStyles();
-                    Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new Form1());
-                }
-                else
-                {
-                    Console.WriteLine("-unupgradable");
-                }
-            }
+            var asd = APIProvider.AuthAPI.GetToken("4MfCH65CufRztreOkao2kgCWH1cEe59z", "OZUegy8FE6vwT4EpeZxxOcp1RHswF2CB").Result;
+            MainStart.Start(args, () =>
+             {
+                 if (CommandProvider.UpgraderVisible)
+                 {
+                     Application.EnableVisualStyles();
+                     Application.SetCompatibleTextRenderingDefault(false);
+                     Application.Run(new Form1());
+                 }
+                 else
+                 {
+                     Application.Run();
+                 }
+             });
+            Console.WriteLine("-unupgradable");
         }
     }
 }

@@ -14,7 +14,7 @@ namespace AutoUpgrade.Net.Client.Commands
         internal virtual bool NullableCheck(out string msg)
         {
             var result = Nullable || (Value != null);
-            msg = result ? null :( Name + ": value can not be null!");
+            msg = result ? null : $"{Name}({Code}): value can not be null!";
             return result;
         }
         public override string ToString()

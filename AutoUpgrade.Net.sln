@@ -15,15 +15,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Release", "Release", "{AF3C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpgrade.Net.Release", "AutoUpgrade.Net.Release\AutoUpgrade.Net.Release.csproj", "{57F328B8-2C2B-4F59-ACD9-8D79A771FD48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{F14AF4D9-E3CD-447C-85E9-FED4D223F083}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{AE71C845-B416-4782-9BBA-95176BCE6D8A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp2", "WindowsFormsApp2\WindowsFormsApp2.csproj", "{AFD8135F-5E2F-402C-B62A-841839C80E60}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpgrade.Net.Client.Winform", "AutoUpgrade.Net.Client.Winform\AutoUpgrade.Net.Client.Winform.csproj", "{63D46998-7985-4794-89A8-8B162FA7E391}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpgrade.Net.Client", "AutoUpgrade.Net.Client\AutoUpgrade.Net.Client.csproj", "{B72030E1-58C2-4F18-A3A9-605E4BF8625E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{FD32794A-89C9-45A8-9F92-F8D2314247C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpgrade.Net.Client.WPF", "AutoUpgrade.Net.Client.WPF\AutoUpgrade.Net.Client.WPF.csproj", "{06452016-9101-4AED-B5CD-D894872677FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,18 +41,6 @@ Global
 		{57F328B8-2C2B-4F59-ACD9-8D79A771FD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57F328B8-2C2B-4F59-ACD9-8D79A771FD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57F328B8-2C2B-4F59-ACD9-8D79A771FD48}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F14AF4D9-E3CD-447C-85E9-FED4D223F083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F14AF4D9-E3CD-447C-85E9-FED4D223F083}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F14AF4D9-E3CD-447C-85E9-FED4D223F083}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F14AF4D9-E3CD-447C-85E9-FED4D223F083}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE71C845-B416-4782-9BBA-95176BCE6D8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE71C845-B416-4782-9BBA-95176BCE6D8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE71C845-B416-4782-9BBA-95176BCE6D8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE71C845-B416-4782-9BBA-95176BCE6D8A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFD8135F-5E2F-402C-B62A-841839C80E60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFD8135F-5E2F-402C-B62A-841839C80E60}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFD8135F-5E2F-402C-B62A-841839C80E60}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFD8135F-5E2F-402C-B62A-841839C80E60}.Release|Any CPU.Build.0 = Release|Any CPU
 		{63D46998-7985-4794-89A8-8B162FA7E391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{63D46998-7985-4794-89A8-8B162FA7E391}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63D46998-7985-4794-89A8-8B162FA7E391}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,6 +49,14 @@ Global
 		{B72030E1-58C2-4F18-A3A9-605E4BF8625E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B72030E1-58C2-4F18-A3A9-605E4BF8625E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B72030E1-58C2-4F18-A3A9-605E4BF8625E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD32794A-89C9-45A8-9F92-F8D2314247C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD32794A-89C9-45A8-9F92-F8D2314247C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD32794A-89C9-45A8-9F92-F8D2314247C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD32794A-89C9-45A8-9F92-F8D2314247C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06452016-9101-4AED-B5CD-D894872677FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06452016-9101-4AED-B5CD-D894872677FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06452016-9101-4AED-B5CD-D894872677FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06452016-9101-4AED-B5CD-D894872677FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +66,8 @@ Global
 		{57F328B8-2C2B-4F59-ACD9-8D79A771FD48} = {AF3C2034-BB4B-4CE8-8602-769A388E5A6F}
 		{63D46998-7985-4794-89A8-8B162FA7E391} = {F9AF0368-3858-4291-B72E-3F69787618F8}
 		{B72030E1-58C2-4F18-A3A9-605E4BF8625E} = {F9AF0368-3858-4291-B72E-3F69787618F8}
+		{FD32794A-89C9-45A8-9F92-F8D2314247C0} = {9948BF91-4B12-4CCA-8DD5-FACE0124B012}
+		{06452016-9101-4AED-B5CD-D894872677FF} = {F9AF0368-3858-4291-B72E-3F69787618F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5AC682DC-61F6-40E3-BD01-C331A379E3EE}

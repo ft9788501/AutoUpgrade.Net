@@ -25,13 +25,13 @@ namespace AutoUpgrade.Net.Client.Commands
                 }
                 else
                 {
-                    msg = Name + ": proecssID format error!";
+                    msg = $"{Name}({Code}): proecssID format error!";
                     return false;
                 }
             }
             else
             {
-                msg = Name + ": value can not be null!";
+                msg = $"{Name}({Code}): value can not be null!";
                 return false;
             }
         }

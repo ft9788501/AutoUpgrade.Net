@@ -1,8 +1,7 @@
-<item>
-<version>2.0.0.1</version>
-<checksum algorithm="MD5">qweqwsfdetw4tredgsfdgew4564wtsfg</checksum>
-<url>https://s3.amazonaws.com/com.ringcentral.rooms/Windows/Rooms_Windows.zip</url>
-<changelog>
-https://github.com/ravibpatel/AutoUpdater.NET/releases
-</changelog>
-</item>
+<?xml version="1.0" encoding="utf-8"?>
+<UpdateXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Version>2.0.0.1</Version>
+  <Checksum>qwhkgaskjdgatgduqhwdgeasdgkjagsd</Checksum>
+  <Url>https://s3.amazonaws.com/com.ringcentral.rooms/Windows/Rooms_Windows.zip</Url>
+  <Changelog>https://github.com/ravibpatel/AutoUpdater.NET/releases</Changelog>
+</UpdateXML>

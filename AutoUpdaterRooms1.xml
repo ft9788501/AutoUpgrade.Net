@@ -1,0 +1,8 @@
+  
+<?xml version="1.0" encoding="utf-8"?>
+<UpdateXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Version>2.0.0.1</Version>
+  <Checksum>516f885c33a1b9528edba438b95c5277</Checksum>
+  <Url>https://s3.amazonaws.com/com.ringcentral.rooms/Windows/Rooms_Windows.zip</Url>
+  <Changelog>https://github.com/ravibpatel/AutoUpdater.NET/releases</Changelog>
+</UpdateXML>
